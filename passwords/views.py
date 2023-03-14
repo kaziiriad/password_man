@@ -1,4 +1,4 @@
-from .models import PasswordEntry, PasswordURL
+tfrom .models import PasswordEntry, PasswordURL
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PasswordEntryForm
 from django.contrib.auth.decorators import login_required
