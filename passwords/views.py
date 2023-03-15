@@ -1,7 +1,23 @@
-tfrom .models import PasswordEntry, PasswordURL
+from .models import PasswordEntry, PasswordURL
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import PasswordEntryForm
+from .forms import PasswordEntryForm, PasswordURLForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            error_message = 'Invalid username or password'
+    else:
+        error_message = ''
+    return render(request, 'passwords/login.html', {'error_message': error_message})
 
 
 @login_required
@@ -23,6 +39,26 @@ def password_url_detail(request, pk):
         {'password_url': password_url, 
         'password_entries': password_entries}
     )
+
+@login_required
+def password_url_create(request):
+
+    if request.method == 'POST':
+        form = PasswordURLForm(request.POST)
+        if form.is_valid():
+            url = form.save()
+            messages.success(request, 'Password URL Added Successfully!')
+            return redirect('password-url-list')
+        else:
+            messages.error(request, 'Invalid Form Data. Please Try Again.')
+    else:
+        form = PasswordURLForm()
+
+    context = {'form': form}
+    return redirect(request, 'passwords/password_url_form.html', context)
+
+
+
 
 @login_required
 def password_entry_create(request, pk):

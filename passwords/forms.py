@@ -5,5 +5,10 @@ class PasswordEntryForm(forms.ModelForm):
     url = forms.ModelChoiceField(queryset=PasswordURL.objects.all())
     class Meta:
         model = PasswordEntry
-        field = ['user', 'url', 'user_id', 'password', 'note']
-        
+        fields = ['user', 'url', 'userid_for_password', 'password', 'note']
+
+class PasswordURLForm(forms.ModelForm):
+
+    class Meta:
+        model = PasswordURL
+        fields = ['web_url']
