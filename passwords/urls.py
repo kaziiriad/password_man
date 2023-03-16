@@ -2,36 +2,42 @@ from django.urls import path
 from . import views
 
 
-app_name = 'passwords'
 urlpatterns = [
+
+    path(
+        'password_url/create',
+        views.password_url_create,
+        name='password_url_create'
+    ),
+
     path(
         '', 
         views.password_url_list, 
-        name='password-url-list'
+        name='password_url_list'
     ),
 
     path(
-        'password-url/<int:pk>/', 
+        'password_url/<int:pk>/', 
         views.password_url_detail, 
-        name='password-url-detail'
+        name='password_url_detail'
     ),
 
     path(
-        'password-url/<int:pk>/password-entry/create/', 
+        'password_url/<int:pk>/password-entry/create/', 
         views.password_entry_create, 
-        name='password-entry-create'
+        name='password_entry_create'
     ),
     
     path(
-        'password-entry/<int:pk>/update/', 
+        'password_entry/<int:pk>/update/', 
         views.password_entry_update, 
-        name='password-entry-update'
+        name='password_entry_update'
     ),
 
     path(
-        'password-entry/<int:pk>/delete/', 
+        'password_entry/<int:pk>/delete/', 
         views.password_entry_delete, 
-        name='password-entry-delete'
+        name='password_entry_delete'
     ),
 
     path(

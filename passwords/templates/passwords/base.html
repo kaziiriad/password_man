@@ -9,7 +9,11 @@
 <body>
     
     <h2><a href="/">Home</a></h2>
-    
+    {% if request.path == '/' %}
+    <form action="{% url 'password_url_create' %}" method="get">
+        <input type="submit" value="Add New URL" />
+    </form>
+    {% endif %}
     {% block content %}
 
     {% endblock %}
