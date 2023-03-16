@@ -27,8 +27,10 @@ def password_url_detail(request, pk):
         'password_entries': password_entries}
     )
 
+@login_required
 def password_url_create(request):
 
+    form = PasswordURLForm()
     if request.method == 'POST':
         form = PasswordURLForm(request.POST)
         if form.is_valid():
@@ -37,11 +39,8 @@ def password_url_create(request):
             return redirect('password_url_list')
         else:
             messages.error(request, 'Invalid Form Data. Please Try Again.')
-    else:
-        form = PasswordURLForm()
 
-    context = {'form': form}
-    return redirect(request, 'passwords/password_url_form.html', context)
+    return render(request, 'passwords/password_url_form.html', {'form': form})
 
 @login_required
 def password_entry_create(request, pk):

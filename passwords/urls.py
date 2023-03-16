@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
 
     path(
-        'password_url/create',
+        'password_url/create/',
         views.password_url_create,
         name='password_url_create'
     ),
