@@ -22,6 +22,8 @@ urlpatterns = [
         name='password_url_detail'
     ),
 
+    path('password_url/<int:pk>/delete', views.password_url_delete, name='password_url_delete'),
+
     path(
         'password_url/<int:pk>/password-entry/create/', 
         views.password_entry_create, 
@@ -44,5 +46,11 @@ urlpatterns = [
         'accounts/login/',
         views.login_view,
         name='login'
+    ),
+
+    path(
+        'accounts/logout/',
+        views.logout_view,
+        name='logout'
     ),
 ]
